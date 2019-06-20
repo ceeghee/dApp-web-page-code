@@ -62,7 +62,8 @@ App = {
   createTokens: function() {
     $('#content').hide();
     $('#loader').show();
-    var numberOfTokens = $('#numberOfTokens').val();
+    var numberOfTokens = parseInt($('#numberOfTokens').val()); // get number of tokens
+
     App.contracts.GoodluckEkeneToken.deployed().then(function(instance) {
       return instance.mint(App.account, numberOfTokens)
     }).then(function success(result) {
@@ -74,7 +75,7 @@ App = {
       App.loading = false;
       loader.hide();
       content.show();
-      // Wait for Sell event
+      
     }, function error(e){
       alert('User Denied Transaction or you are not a Minter') 
       App.loading = false;
